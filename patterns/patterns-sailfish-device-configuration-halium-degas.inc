@@ -1,8 +1,8 @@
-%package -n patterns-sailfish-device-configuration-halium-ansuz
-Summary: Sailfish HW Adaptation halium-ansuz
+%package -n patterns-sailfish-device-configuration-halium-degas
+Summary: Sailfish HW Adaptation halium-degas
 
-Requires: patterns-sailfish-device-configuration-common-halium-ansuz
-Requires: patterns-sailfish-device-adaptation-halium-ansuz
+Requires: patterns-sailfish-device-configuration-common-halium-degas
+Requires: patterns-sailfish-device-adaptation-halium-degas
 
 Requires: patterns-sailfish-cellular-apps
 Requires: patterns-sailfish-applications
@@ -61,7 +61,7 @@ Recommends: zypper
 Recommends: strace
 Recommends: jolla-rnd-device
 
-%description -n patterns-sailfish-device-configuration-halium-ansuz
-Pattern with packages for halium-ansuz configurations
+%description -n patterns-sailfish-device-configuration-halium-degas
+Pattern with packages for halium-degas configurations
 
-%files -n patterns-sailfish-device-configuration-halium-ansuz
+%files -n patterns-sailfish-device-configuration-halium-degas

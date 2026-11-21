@@ -1,5 +1,5 @@
 # README
-# Use this script to flash SailfishOS to the Volla Phone Plinius
+# Use this script to flash SailfishOS to the Xiaomi 14T (degas)
 # The device must be in "fastboot" (or bootloader) mode.
 # It may be necessary to run this script as root.
 # Usage: sh flash.sh or ./flash.sh
@@ -19,7 +19,7 @@ $(tput setaf 220)Be aware, the flashing process might take up to 10 minutes.
 The screen is expected to go black. This is fine, flashing continues.$(tput sgr0)
 "
 
-fastboot $* getvar product 2>&1 | grep "^product: k6878v1_64"
+fastboot $* getvar product 2>&1 | grep "^product: degas"
 if [ $? -ne 0 ] ; then
 	echo "$(tput setaf 1)Mismatched image and device$(tput sgr0)";
 	exit 1;
@@ -40,8 +40,6 @@ fastboot flash init_boot_a init_boot.img || handle_error flash init_boot_a error
 fastboot flash init_boot_b init_boot.img || handle_error flash init_boot_b error
 
 #Flash vendor_boot
-fastboot flash vendor_boot_a vendor_boot.img || handle_error flash vendor_boot_a error
-fastboot flash vendor_boot_b vendor_boot.img || handle_error flash vendor_boot_b error
 
 #Flash super
 fastboot flash super super.img || handle_error flash super error

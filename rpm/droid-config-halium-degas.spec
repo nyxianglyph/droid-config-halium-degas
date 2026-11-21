@@ -1,11 +1,11 @@
 # These and other macros are documented in ../droid-configs-device/droid-configs.inc
 # Feel free to cleanup this file by removing comments, once you have memorised them ;)
 
-%define device halium-ansuz
-%define vendor volla
+%define device halium-degas
+%define vendor xiaomi
 
-%define vendor_pretty Volla
-%define device_pretty Volla Phone Plinius
+%define vendor_pretty Xiaomi
+%define device_pretty Xiaomi 14T
 
 # Community HW adaptations need this
 %define community_adaptation 1
@@ -31,8 +31,8 @@ AutoReqProv: no
 %define ofono_disable_plugins bluez4,dun_gw_bluez4,hfp_ag_bluez4,hfp_bluez4,dun_gw_bluez5,hfp_bluez5
 
 %include droid-configs-device/droid-configs.inc
-%include patterns/patterns-sailfish-device-adaptation-halium-ansuz.inc
-%include patterns/patterns-sailfish-device-configuration-halium-ansuz.inc
+%include patterns/patterns-sailfish-device-adaptation-halium-degas.inc
+%include patterns/patterns-sailfish-device-configuration-halium-degas.inc
 
 # IMPORTANT if you want to comment out any macros in your .spec, delete the %
 # sign, otherwise they will remain defined! E.g.:

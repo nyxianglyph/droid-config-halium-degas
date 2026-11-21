@@ -1,6 +1,12 @@
-# droid-config-halium-ansuz
+# droid-config-halium-degas
 
-This project contains the device specific configuration for the Volla Phone Plinius on SailfishOS
+Device specific configuration for the Xiaomi 14T (`degas`, MediaTek
+Dimensity 8300-Ultra `mt6897`) on Sailfish OS.
 
-The project is is named halium-ansuz on the basis that the build of SailfishOS on the
-Volla Phone Plinius uses halium as a base
+The device is named `halium-degas` because the port runs on a Halium 14 base
+(the UBports Halium GSI system image in an LXC container), like the Volla Phone
+Plinius port this repository is derived from
+([droid-config-halium-ansuz](https://github.com/HelloVolla/droid-config-halium-ansuz)).
+
+Kernel: [android_kernel_xiaomi_degas](https://github.com/nyxianglyph/android_kernel_xiaomi_degas)
+(`halium-6.1.157`, `sfos` flavour).

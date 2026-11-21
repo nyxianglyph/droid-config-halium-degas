@@ -28,7 +28,7 @@ while [ "$(getprop vendor.service.nvram_init)" != "Ready" ]; do sleep 0.2; done
 # The WLAN driver lives in vendor_dlkm, outside the host's module tree.
 # mac80211 needs libarc4 from system_dlkm.
 modprobe -q libarc4
-for mod in cfg80211 mac80211 wlan_drv_gen4m_6878; do
+for mod in cfg80211 mac80211 wlan_drv_gen4m_6897; do
     insmod /vendor_dlkm/lib/modules/$mod.ko 2>/dev/null
 done
 

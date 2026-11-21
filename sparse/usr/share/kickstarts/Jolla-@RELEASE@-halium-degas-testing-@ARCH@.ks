@@ -1,4 +1,4 @@
-# DisplayName: Jolla ansuz/@ARCH@ (release) 1
+# DisplayName: Jolla degas/@ARCH@ (release) 1
 # KickstartType: release
 # SuggestedImageType: fs
 # SuggestedArchitecture: aarch64
@@ -10,9 +10,9 @@ part / --fstype="ext4" --size=7160 --label=root
 
 ## No suitable configuration found in /tmp/sandbox/usr/share/ssu/kickstart/bootloader
 
-repo --name=adaptation-community-ansuz-@RELEASE@ --baseurl=http://repo.sailfishos.org/obs/nemo:/devel:/hw:/volla:/halium-ansuz/sailfish_latest_@ARCH@/
-repo --name=adaptation-community-halium13-@RELEASE@ --baseurl=http://repo.sailfishos.org/obs/nemo:/devel:/hw:/halium:/14/sailfish_latest_@ARCH@/
-repo --name=adaptation-community-common-@RELEASE@ --baseurl=http://repo.sailfishos.org/obs/nemo:/devel:/hw:/common/sailfish_latest_@ARCH@/
+repo --name=adaptation-community-degas-@RELEASEMAJMIN@ --baseurl=file:///share/repo/
+repo --name=adaptation-community-halium13-@RELEASEMAJMIN@ --baseurl=http://repo.sailfishos.org/obs/nemo:/testing:/hw:/halium:/14:/@RELEASEMAJMIN@/sailfishos_@RELEASEMAJMIN@_@ARCH@/
+repo --name=adaptation-community-common-@RELEASE@ --baseurl=http://repo.sailfishos.org/obs/nemo:/testing:/hw:/common/sailfishos_@RELEASEMAJMIN@_@ARCH@/
 
 repo --name=sailfishos-chum-@RELEASEMAJMIN@ --baseurl=http://repo.sailfishos.org/obs/sailfishos:/chum/@RELEASEMAJMIN@_@ARCH@/
 repo --name=adaptation-common-@RELEASE@ --baseurl=https://releases.jolla.com/releases/@RELEASE@/jolla-hw/adaptation-common/@ARCH@/
@@ -21,7 +21,7 @@ repo --name=hotfixes-@RELEASE@ --baseurl=https://releases.jolla.com/releases/@RE
 repo --name=jolla-@RELEASE@ --baseurl=https://releases.jolla.com/releases/@RELEASE@/jolla/@ARCH@/
 
 %packages
-patterns-sailfish-device-configuration-halium-ansuz
+patterns-sailfish-device-configuration-halium-degas
 %end
 
 %attachment
@@ -30,7 +30,7 @@ patterns-sailfish-device-configuration-halium-ansuz
 /boot/vendor_boot.img
 /boot/init_boot.img
 /etc/hw-release
-droid-config-halium-ansuz-out-of-image-files
+droid-config-halium-degas-out-of-image-files
 %end
 
 %pre

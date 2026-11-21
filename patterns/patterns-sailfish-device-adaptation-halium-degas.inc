@@ -1,16 +1,15 @@
-%package -n patterns-sailfish-device-adaptation-halium-ansuz
-Summary: Sailfish HW Adaptation halium-ansuz
+%package -n patterns-sailfish-device-adaptation-halium-degas
+Summary: Sailfish HW Adaptation halium-degas
 
-Requires: kernel-adaptation-halium-ansuz
-Requires: droid-config-halium-ansuz-sailfish
-Requires: droid-config-halium-ansuz-pulseaudio-settings
-Requires: droid-config-halium-ansuz-policy-settings
-Requires: droid-config-halium-ansuz-preinit-plugin
-Requires: droid-config-halium-ansuz-flashing
-Requires: droid-config-halium-ansuz-bluez5
-Requires: droid-config-halium-ansuz-out-of-image-files
-Requires: droid-hal-vendor-img-halium-ansuz
-Requires: droid-hal-version-halium-ansuz
+Requires: kernel-adaptation-halium-degas
+Requires: droid-config-halium-degas-sailfish
+Requires: droid-config-halium-degas-pulseaudio-settings
+Requires: droid-config-halium-degas-policy-settings
+Requires: droid-config-halium-degas-preinit-plugin
+Requires: droid-config-halium-degas-flashing
+Requires: droid-config-halium-degas-bluez5
+Requires: droid-config-halium-degas-out-of-image-files
+Requires: droid-hal-version-halium-degas
 
 Requires: qt5-plugin-generic-evdev
 
@@ -87,7 +86,7 @@ Requires: sailfish-device-encryption-community-droid
 # For GPS
 Requires: geoclue-provider-hybris
 
-%description -n patterns-sailfish-device-adaptation-halium-ansuz
-Pattern with packages for halium-ansuz HW Adaptation
+%description -n patterns-sailfish-device-adaptation-halium-degas
+Pattern with packages for halium-degas HW Adaptation
 
-%files -n patterns-sailfish-device-adaptation-halium-ansuz
+%files -n patterns-sailfish-device-adaptation-halium-degas

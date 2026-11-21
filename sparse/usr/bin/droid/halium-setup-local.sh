@@ -53,3 +53,7 @@ for dir in $(echo "$hybris_path" | tr ":" " "); do
         ln -s "$lib" "$hybris_dir/$name"
     done
 done
+
+# Properties HyperOS takes from the opcust partition (modem IMEI signature
+# check needs ro.product.vendor.name from there).
+/bin/sh /usr/bin/droid/opcust-props.sh

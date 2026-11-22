@@ -1,0 +1,7 @@
+# Xiaomi 14T panel (1220x2712): punch hole camera in the top centre and
+# rounded corners. Values from the stock overlay: cutout 60 px wide, status
+# bar 102 px high, corner radius 105 px. The cutout is given a few pixels of
+# margin on each side.
+[desktop/sailfish/silica]
+cutouts = [[575, 0, 70, 102]]
+rounded_corners = [[105, 105, 105], [-105, 105, 105], [105, -105, 105], [-105, -105, 105]]

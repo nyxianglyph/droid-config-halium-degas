@@ -31,7 +31,7 @@ Related repositories:
 | Area | State |
 |---|---|
 | Boot, UI, touch | Works |
-| Display | Works at 144 Hz |
+| Display | Works at 144 Hz; camera cutout and rounded corners are configured, UI scale 1.75 |
 | Cellular | Both SIMs register on LTE; calls and mobile data work |
 | Call audio | Earpiece and speaker, volume adjustable |
 | Media audio | Works |
@@ -46,6 +46,9 @@ Related repositories:
 - Browser: pages with heavy per-frame scripts stay slow. Gecko paints at
   72 Hz by default here (`usr/share/degas/gecko-prefs.js`); at 144 Hz such
   pages saturate the main thread.
+  The same file locks the web content scale to 3.0 (407 px wide viewport);
+  Sailfish's own choice for this resolution is 2.0, which makes sites serve
+  tablet layouts.
 - GPU frequency scaling: MediaTek's GED needs frame timing from Android's
   graphics stack, so the GPU would stay at its lowest frequency. A frequency
   floor is set instead (`usr/bin/droid/perf-tune.sh`), which costs power.

@@ -26,6 +26,11 @@ Related repositories:
 - The Sailfish root file system replaces `system_a` inside `super`; home is
   LUKS encrypted on `userdata`.
 
+## Download
+
+Ready-made images (boot, init_boot, super, an empty userdata image and a
+flash script in one archive): <https://t.me/nyxian_degas/21>
+
 ## Installing
 
 The image build produces `boot.img`, `init_boot.img` and a `super.img` that

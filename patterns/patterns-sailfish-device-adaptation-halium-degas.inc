@@ -36,7 +36,6 @@ Requires: ofono-binder-plugin-ext-mtk
 Requires: dummy_netd
 
 # Vibra
-Requires: ngfd-plugin-native-vibrator
 Requires: libngf-qt5-qtfeedback
 
 # Sensors

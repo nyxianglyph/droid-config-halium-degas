@@ -1,0 +1,8 @@
+# Sailfish OS: do not start Xiaomi's vibrator HAL.
+#
+# At start it plays effect 197 on the awinic_haptic input device, a streaming
+# (RTP) effect that waits for data from Xiaomi's haptics framework. Nothing
+# feeds it here, so the driver's single work queue stays blocked in
+# aw86927_rtp_work_routine and every later vibration request is queued behind
+# it: no haptics at all. ngfd drives the same input device directly
+# (ffmemless plugin), so the HAL is not needed.

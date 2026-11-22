@@ -68,6 +68,7 @@ without manual changes.
 | Call audio | Earpiece and speaker, volume adjustable |
 | Media audio | Works |
 | Vibration | Works |
+| Charging indicator | Works |
 | Fingerprint (under-display) | Enrolling and unlocking work |
 | Camera | Opens and shows a picture; nothing further tested |
 | Home encryption | Works |

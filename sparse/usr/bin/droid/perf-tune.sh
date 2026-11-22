@@ -32,6 +32,16 @@ WARM=43000
 COOL=40000
 UCLAMP_MIN=30
 
+# Gecko reads default preferences from its versioned install directory; copy
+# ours into whichever version is installed. A symlink does not work: the
+# application sandbox hides /usr/share/degas.
+for d in /usr/lib64/xulrunner-qt5-*/; do
+    [ -d "$d" ] || continue
+    mkdir -p "${d}defaults/pref"
+    rm -f "${d}defaults/pref/degas.js"
+    cp /usr/share/degas/gecko-prefs.js "${d}defaults/pref/degas.js"
+done
+
 i=0
 while [ ! -e $GED ] && [ $i -lt 30 ]; do sleep 1; i=$((i+1)); done
 [ -e $GED ] || exit 0

@@ -1,11 +1,11 @@
 [Unit]
-Description=GPU frequency floor and foreground CPU hints
+Description=GPU frequency floor, thermal scenario and foreground CPU hints
 After=droid-hal-init.service
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/droid/perf-tune.sh
-RemainAfterExit=yes
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target

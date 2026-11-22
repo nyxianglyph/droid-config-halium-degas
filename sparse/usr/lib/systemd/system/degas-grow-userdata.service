@@ -1,0 +1,14 @@
+[Unit]
+Description=Grow the userdata file system to the partition size
+DefaultDependencies=no
+After=userdata.mount
+Requires=userdata.mount
+Before=sailfish-device-encryption-community-wizard.service late-mount-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/droid/grow-userdata.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=local-fs.target

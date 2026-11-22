@@ -46,17 +46,20 @@ install:
   mode. The phone boots the normal system instead and keeps trying, which
   looks like a boot loop. `fastboot erase misc` clears it.
 - Flashing a sparse ext4 image of the full partition size (235 GB) hangs the
-  bootloader. Flash a small empty ext4 image instead (8 GiB works) and grow
-  it after the first boot, before the encryption setup creates the 200 GB
-  home image: `resize2fs` on the `userdata` block device from the root
-  shell (telnet on port 2323 over USB networking).
+  bootloader. Flash a small empty ext4 image instead (the releases carry an
+  8 GiB one). `degas-grow-userdata.service` grows it to the partition size
+  at boot, before the encryption setup creates the 200 GB home image.
+  `fastboot format:ext4 userdata` also works where fastboot has its
+  `mke2fs` next to it.
 - If a new system was ever booted with an old `userdata`, delete
   `/etc/sailfish-device-encryption-community/config.ini` and reboot;
   otherwise it asks for a password for a home image that no longer exists.
 
-A fresh install done this way was checked on 2026-11-22: both SIMs,
-fingerprint enrolling and unlocking, display scale and cutout came up
-without manual changes.
+A fresh install was checked on 2026-11-22: both SIMs, fingerprint
+enrolling and unlocking, display scale and cutout came up without manual
+changes. In that install the file system was still grown by hand; the
+service was added afterwards and has only run as a no-op on a full-size
+file system.
 
 ## Status (2026-11-22)
 

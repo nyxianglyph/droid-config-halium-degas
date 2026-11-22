@@ -75,7 +75,7 @@ without manual changes.
 | Wi-Fi | Works |
 | Bluetooth | Works |
 | Flashlight | Works through [flashlight-sysfs](https://github.com/nyxianglyph/flashlight-sysfs) |
-| GPS | No fix yet indoors. The receiver runs and the assistance data (EPO) downloads; an outdoor test is pending. SUPL does not work (no name resolution for Android-side processes) |
+| GPS | Does not work: no fix outdoors either. The receiver runs, assistance data (EPO) downloads and the satellite list is filled, but every satellite reports zero signal. Cause not found |
 | Home encryption | Works |
 | NFC, sensors, SMS, video recording | Not verified |
 

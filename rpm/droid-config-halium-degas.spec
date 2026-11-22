@@ -32,6 +32,17 @@ AutoReqProv: no
 %define ofono_enable_plugins bluez5,hfp_ag_bluez5
 %define ofono_disable_plugins bluez4,dun_gw_bluez4,hfp_ag_bluez4,hfp_bluez4,dun_gw_bluez5,hfp_bluez5
 
+# The community-adaptation template leaves the Halium release as a literal
+# "%%{haliumRelease}" in the adaptation-halium repository URL, and the
+# per-device OBS project it names for adaptation-community does not exist
+# for this port (the device packages are built locally). Both made every
+# repository refresh report errors.
+%define additional_post_scripts \
+sed -i 's|%%{haliumRelease}|14|' /usr/share/ssu/features.d/adaptation-community.ini || : \
+rm -f /var/cache/ssu/features.ini || : \
+ssu dr adaptation-community || : \
+%{nil}
+
 %include droid-configs-device/droid-configs.inc
 %include patterns/patterns-sailfish-device-adaptation-halium-degas.inc
 %include patterns/patterns-sailfish-device-configuration-halium-degas.inc

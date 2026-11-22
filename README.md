@@ -71,9 +71,12 @@ without manual changes.
 | Charging indicator | Works |
 | USB | usb-moded works: developer mode (network and SSH), MTP and charging modes are offered; unplug/replug is handled |
 | Fingerprint (under-display) | Enrolling and unlocking work |
-| Camera | Opens and shows a picture; nothing further tested |
+| Camera | Works |
+| Wi-Fi | Works |
+| Bluetooth | Works |
+| Flashlight | Does not work |
 | Home encryption | Works |
-| Wi-Fi, Bluetooth, GPS, NFC, sensors, SMS, video | Not verified |
+| GPS, NFC, sensors, SMS, video recording | Not verified |
 
 ## Known issues
 

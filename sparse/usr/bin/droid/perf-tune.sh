@@ -5,8 +5,8 @@
 # Android's graphics stack. Under Sailfish that information never arrives and
 # the GPU stays at its lowest OPP (265 MHz) even at 98 % load. A floor is set
 # instead; the GPU is still power gated when idle.
-# Do not touch the other /sys/kernel/ged/hal nodes from here: writing
-# force_loading_base reboots the phone.
+# Only custom_boost_gpu_freq is used here; the other /sys/kernel/ged/hal nodes
+# were not validated on this phone.
 #
 # Thermal: Xiaomi's mi_thermald gets no scenario from a framework and stays in
 # its default profile, which caps the GPU at OPP 47 (601 MHz) and the CPUs at

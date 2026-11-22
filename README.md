@@ -69,6 +69,7 @@ without manual changes.
 | Media audio | Works |
 | Vibration | Works |
 | Charging indicator | Works |
+| USB | usb-moded works: developer mode (network and SSH), MTP and charging modes are offered; unplug/replug is handled |
 | Fingerprint (under-display) | Enrolling and unlocking work |
 | Camera | Opens and shows a picture; nothing further tested |
 | Home encryption | Works |

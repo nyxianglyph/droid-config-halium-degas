@@ -16,6 +16,9 @@ Requires: sailfish-content-graphics-z1.75
 
 # For flashlight control
 Requires: jolla-settings-system-flashlight
+# The Halium image's libdroidmedia cannot switch the torch; the kernel's
+# flashlight core can.
+Requires: flashlight-sysfs
 
 # For multi-SIM devices
 Requires: jolla-settings-networking-multisim

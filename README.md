@@ -74,7 +74,7 @@ without manual changes.
 | Camera | Works |
 | Wi-Fi | Works |
 | Bluetooth | Works |
-| Flashlight | Does not work |
+| Flashlight | Works through [flashlight-sysfs](https://github.com/nyxianglyph/flashlight-sysfs) |
 | GPS | Does not work: no position fix with location enabled |
 | Home encryption | Works |
 | NFC, sensors, SMS, video recording | Not verified |

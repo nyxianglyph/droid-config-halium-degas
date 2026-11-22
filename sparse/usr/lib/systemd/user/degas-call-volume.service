@@ -1,0 +1,9 @@
+[Unit]
+Description=Pass the call volume to the audio HAL as a volume index
+After=pulseaudio.service
+PartOf=pulseaudio.service
+
+[Service]
+ExecStart=/usr/bin/droid/call-volume-sync.sh
+Restart=always
+RestartSec=2

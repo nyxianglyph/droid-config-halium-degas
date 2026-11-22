@@ -74,8 +74,10 @@ Requires: usb-moded
 
 Requires: rfkill
 
-# enable device lock and allow to select untrusted software
-Requires: jolla-devicelock-plugin-encsfa
+# Device lock with home encryption and fingerprint support. The fingerprint
+# daemon talks to the vendor's AIDL HAL over libgbinder.
+Requires: sailfish-devicelock-fpd
+Requires: sailfish-fpd-community
 
 # Enable home encryption
 #Requires: sailfish-device-encryption

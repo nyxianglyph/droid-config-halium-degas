@@ -31,3 +31,11 @@ ro.telephony.default_network=32,32,32,32
 ro.vendor.mediatek.rsc_name=GL
 ro.vendor.sys.current_rsc_path=/system/etc/rsc/GL
 ro.vendor.vnd.current_rsc_path=/vendor/etc/rsc/GL
+
+# 144 Hz. Sailfish's hwcomposer QPA plugin only uses the active display
+# config and never selects one, so the panel stayed in its preferred 60 Hz
+# mode. The MediaTek HWC applies a "boot display config" on its own at start
+# when these are set: <config>_<width>x<height>@<vsync period in ns>, config
+# = DRM mode index (0: 60 Hz, 1: 144 Hz, 2: 120 Hz, 3: 90 Hz).
+persist.vendor.hwcomposer.boot_display_config.display_0=1_1220x2712@6944444
+persist.vendor.hwcomposer.boot_display_config.state.display_0=ENABLE

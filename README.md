@@ -100,6 +100,68 @@ without manual changes.
 - Calls: a slight echo for the far end at full earpiece volume was reported
   once and not rechecked.
 
+## Where to continue
+
+The port is published as it stands; these are the open ends, roughly by
+how much is known about them.
+
+- **GPS: no signal.** `geoclue-provider-hybris-binder` connects to the AIDL
+  GNSS HAL, `mnld` runs, EPO assistance data downloads (after the CA
+  certificate fix in `halium-setup-local.sh`) and the satellite list is filled
+  with plausible elevation and azimuth, but every satellite has SNR 0 and
+  `mnld` logs `PMTKAGC ... agc: 6` every second. The kernel driver opens both
+  links (L1, L5) and switches the LNA pins to DSP control
+  (`/sys/kernel/debug/pinctrl/pinctrl-handles`, device `18000000.gps`). Not
+  checked: what stock HyperOS logs at the same place (AGC, SNR), the modem's
+  blanking signal, the SCP low-power path (`/dev/gps2scp`), the clock for the
+  GNSS RF. A stock capture of `logcat | grep -E "PMTKAGC|linux_gps_init"` and
+  the `GDL` kernel lines would show where the two differ. SUPL does not work
+  either: Android-side processes have no name resolution with a network id
+  (no netd).
+- **Fingerprint UI.** There is no marker for the sensor position in the
+  enrolment pages and on the lock screen, and the finger does not wake the
+  phone: the display has to be on. The daemon keeps one template store, for
+  Android user 0.
+- **Browser.** Heavy pages stay slow; a one second hitch when reversing the
+  scroll direction on long pages was reported and not investigated.
+- **GPU frequency scaling** is a fixed floor, not real DVFS. GED wants frame
+  timestamps (`GED_BRIDGE_COMMAND_GPU_TIMESTAMP`) from the graphics stack;
+  nothing sends them here.
+- **Thermal policy** is Xiaomi's daemon with two scenarios switched by
+  `perf-tune.sh`. It throttles hard above about 44 °C board temperature.
+- **Not tested at all:** NFC, sensors (rotation, proximity, light), SMS, video
+  recording, MTP file transfer, Bluetooth audio, tethering, dual SIM data
+  switching, VoLTE.
+- **Android apps.** Jolla's AppSupport is not available for community ports.
+  Waydroid: the kernel has what it needs; the user space side was not set
+  up (the vendor only offers an AIDL graphics allocator).
+- **Updates.** The device packages are built locally and are not on OBS, so
+  there is no over-the-air update path for them.
+
+## Building
+
+`build/` has the scripts used for this port. They expect the related
+repositories checked out next to this one, and docker.
+
+    build/build-sdk-rpm.sh droid-config-halium-degas rpm/droid-config-halium-degas.spec \
+        "community-adaptation-devel ssu-kickstart-configuration qt5-qttools-kmap2qmap"
+    build/build-sdk-rpm.sh droid-hal-version-halium-degas rpm/droid-hal-version-halium-degas.spec
+    build/build-sdk-rpm.sh sailfish-fpd-community rpm/sailfish-fpd-community.spec \
+        "libgbinder-devel glib2-devel qt5-qtcore-devel qt5-qtdbus-devel qt5-qmake desktop-file-utils"
+    build/build-sdk-rpm.sh flashlight-sysfs rpm/flashlight-sysfs.spec "glib2-devel gcc make"
+    BUILD_TOOLS=... build/build-kernel-rpm.sh
+    STOCK=... LPMAKE=... build/create-image.sh
+
+`create-image.sh` needs the stock partition images of HyperOS
+`OS3.0.305.0.WNEIDXM` (`vendor_a`, `odm_a`, `vendor_dlkm_a`, `odm_dlkm_a`,
+`system_dlkm_a`); they are packed into `super.img` unchanged. The scripts in
+`build/` are the ones used here with the local paths replaced by variables;
+in that form they have only been syntax checked.
+
+Debugging access: enable developer mode in Settings and use SSH over USB
+(`192.168.2.15`) or WLAN. The inherited passwordless telnet on USB was
+removed.
+
 ## What is device specific here
 
 - `usr/bin/droid/mount-vendor.sh`: the vendor partitions are erofs.

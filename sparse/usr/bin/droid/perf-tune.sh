@@ -45,8 +45,6 @@ done
 i=0
 while [ ! -e $GED ] && [ $i -lt 30 ]; do sleep 1; i=$((i+1)); done
 [ -e $GED ] || exit 0
-echo $FLOOR_NORMAL > $GED
-
 # The "interactive" cgroup appears when the user session starts.
 (
     i=0
@@ -66,20 +64,50 @@ echo $FLOOR_NORMAL > $GED
     done
 ) &
 
-[ -e $TM/sconfig ] && [ -e $TM/board_sensor_temp ] || exit 0
+# GED forgets the floor whenever the display is turned off (it goes back to
+# 64, the lowest OPP, and the UI then runs at about 100 fps on 265 MHz). The
+# wanted floor is kept in a file; it is written again as soon as mce reports
+# the display on, and checked on every pass of the loop below.
+WANT=/run/degas-gpu-floor
+set_floor() {
+    echo $1 > $WANT
+    echo $1 > $GED
+}
+apply_floor() {
+    w=$(cat $WANT 2>/dev/null)
+    [ -n "$w" ] && [ "$(head -n 1 $GED 2>/dev/null)" != "$w" ] && echo $w > $GED
+}
+set_floor $FLOOR_NORMAL
+
+(
+    dbus-monitor --system "type='signal',interface='com.nokia.mce.signal',member='display_status_ind'" 2>/dev/null |
+    while read -r line; do
+        case "$line" in *'string "on"'*) apply_floor ;; esac
+    done
+) &
+
+have_thermal=0
+[ -e $TM/sconfig ] && [ -e $TM/board_sensor_temp ] && have_thermal=1
 
 mode=normal
 while :; do
-    t=$(cat $TM/board_sensor_temp 2>/dev/null)
-    case "$t" in ''|*[!0-9]*) sleep 5; continue ;; esac
-    if [ $mode = normal ] && [ "$t" -le $COOL ]; then
-        echo $SCONFIG_PERF > $TM/sconfig
-        echo $FLOOR_PERF > $GED
-        mode=perf
-    elif [ $mode = perf ] && [ "$t" -ge $WARM ]; then
-        echo $SCONFIG_NORMAL > $TM/sconfig
-        echo $FLOOR_NORMAL > $GED
-        mode=normal
+    if [ $have_thermal = 1 ]; then
+        t=$(cat $TM/board_sensor_temp 2>/dev/null)
+        case "$t" in
+        ''|*[!0-9]*) ;;
+        *)
+            if [ $mode = normal ] && [ "$t" -le $COOL ]; then
+                echo $SCONFIG_PERF > $TM/sconfig
+                set_floor $FLOOR_PERF
+                mode=perf
+            elif [ $mode = perf ] && [ "$t" -ge $WARM ]; then
+                echo $SCONFIG_NORMAL > $TM/sconfig
+                set_floor $FLOOR_NORMAL
+                mode=normal
+            fi
+            ;;
+        esac
     fi
+    apply_floor
     sleep 5
 done

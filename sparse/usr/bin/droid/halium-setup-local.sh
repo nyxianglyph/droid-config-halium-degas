@@ -54,6 +54,20 @@ for dir in $(echo "$hybris_path" | tr ":" " "); do
     done
 done
 
+# The VNDK libcurl takes its CA certificates from /system/etc/security/cacerts,
+# which the Halium system image does not have. MediaTek's mnld downloads the
+# GNSS assistance data (EPO) with it and failed with a certificate error, so
+# positioning only ever did unassisted cold starts. The system image is read
+# only: put a copy of the directory, with a link to the vendor's certificate
+# store, in its place.
+SEC=/android/system/etc/security
+if [ -d $SEC ] && [ ! -e $SEC/cacerts ]; then
+    mkdir -p /run/droid-hal/security
+    cp -a $SEC/. /run/droid-hal/security/
+    ln -sfn /vendor/etc/security/cacerts /run/droid-hal/security/cacerts
+    mount -o bind /run/droid-hal/security $SEC
+fi
+
 # Properties HyperOS takes from the opcust partition (modem IMEI signature
 # check needs ro.product.vendor.name from there).
 /bin/sh /usr/bin/droid/opcust-props.sh

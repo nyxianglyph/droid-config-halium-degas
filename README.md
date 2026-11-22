@@ -26,6 +26,38 @@ Related repositories:
 - The Sailfish root file system replaces `system_a` inside `super`; home is
   LUKS encrypted on `userdata`.
 
+## Installing
+
+The image build produces `boot.img`, `init_boot.img` and a `super.img` that
+carries the Sailfish root file system together with the stock vendor
+partitions. With an unlocked bootloader, in fastboot mode:
+
+    fastboot flash boot_a boot.img
+    fastboot flash boot_b boot.img
+    fastboot flash init_boot_a init_boot.img
+    fastboot flash init_boot_b init_boot.img
+    fastboot flash super super.img
+    fastboot set_active a
+
+`userdata` has to be ext4 (the stock one is f2fs) and empty for a first
+install:
+
+- Do not use `fastboot reboot recovery`: these boot images have no recovery
+  mode. The phone boots the normal system instead and keeps trying, which
+  looks like a boot loop. `fastboot erase misc` clears it.
+- Flashing a sparse ext4 image of the full partition size (235 GB) hangs the
+  bootloader. Flash a small empty ext4 image instead (8 GiB works) and grow
+  it after the first boot, before the encryption setup creates the 200 GB
+  home image: `resize2fs` on the `userdata` block device from the root
+  shell (telnet on port 2323 over USB networking).
+- If a new system was ever booted with an old `userdata`, delete
+  `/etc/sailfish-device-encryption-community/config.ini` and reboot;
+  otherwise it asks for a password for a home image that no longer exists.
+
+A fresh install done this way was checked on 2026-11-22: both SIMs,
+fingerprint enrolling and unlocking, display scale and cutout came up
+without manual changes.
+
 ## Status (2026-11-22)
 
 | Area | State |

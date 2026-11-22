@@ -75,8 +75,9 @@ without manual changes.
 | Wi-Fi | Works |
 | Bluetooth | Works |
 | Flashlight | Does not work |
+| GPS | Does not work: no position fix with location enabled |
 | Home encryption | Works |
-| GPS, NFC, sensors, SMS, video recording | Not verified |
+| NFC, sensors, SMS, video recording | Not verified |
 
 ## Known issues
 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Earpiece call volume for Sailfish OS on the Xiaomi 14T (degas).
+  Stock has dl_gain = 0 (maximum) for every level: HyperOS sets the call
+  volume elsewhere, so under Halium the earpiece always played at full gain
+  and the volume keys did nothing. The HAL picks entry floor(5 * volume) + 1,
+  i.e. the first six entries. Values are indexes into VolumeGainMap
+  (RCV_NORMAL: analog only up to 18, which this hardware cannot apply; from
+  19 on -1 dB digital per step), so 37..19 is about -19 dB .. -1 dB.
+  Only param_id 0 (receiver) differs from the stock file.
+-->
+<AudioParam version="1.0">
+  <ParamTree>
+    <Param path="RCV" param_id="0"/>
+    <Param path="HAC" param_id="1"/>
+    <Param path="HS" param_id="2"/>
+    <Param path="HP" param_id="2"/>
+    <Param path="SPK" param_id="3"/>
+    <Param path="HS5POLE" param_id="4"/>
+    <Param path="HS5POLE_ANC" param_id="4"/>
+    <Param path="TTY" param_id="5"/>
+    <Param path="USB" param_id="2"/>
+    <Param path="SPK_SV" param_id="3"/>
+    <Param path="RCV_SV" param_id="0"/>
+    <Param path="HEARING_AID" param_id="6"/>
+    <Param path="LPBK_RCV" param_id="0"/>
+    <Param path="LPBK_HP" param_id="2"/>
+    <Param path="LPBK_SPK" param_id="3"/>
+    <Param path="LPBK_NODELAY_HP_MIC1" param_id="2"/>
+    <Param path="LPBK_NODELAY_HP_MIC2" param_id="2"/>
+    <Param path="LPBK_NODELAY_HP_MIC3" param_id="2"/>
+    <Param path="RCV_EMERGENCY" param_id="0"/>
+    <Param path="RCV_2MIC" param_id="0"/>
+    <Param path="RCV_2MICEV" param_id="0"/>
+    <Param path="SPK_EMERGENCY" param_id="3"/>
+    <Param path="SPK_2MIC" param_id="3"/>
+    <Param path="SPK_2MICEV" param_id="3"/>
+    <Param path="BT" param_id="2"/>
+    <Param path="MISC" param_id="2"/>
+    <Param path="HEARING_AID" param_id="0"/>
+  </ParamTree>
+  <ParamUnitPool>
+    <ParamUnit param_id="0">
+      <Param name="dl_gain" value="37,33,29,25,22,19,19,19,19,19,19"/>
+      <Param name="ul_gain" value="21"/>
+      <Param name="stf_gain" value="0"/>
+    </ParamUnit>
+    <ParamUnit param_id="1">
+      <Param name="dl_gain" value="0,0,0,0,0,0,0,0,0,0,0"/>
+      <Param name="ul_gain" value="0"/>
+      <Param name="stf_gain" value="0"/>
+    </ParamUnit>
+    <ParamUnit param_id="2">
+      <Param name="dl_gain" value="0,0,0,0,0,0,0,0,0,0,0"/>
+      <Param name="ul_gain" value="21"/>
+      <Param name="stf_gain" value="0"/>
+    </ParamUnit>
+    <ParamUnit param_id="3">
+      <Param name="dl_gain" value="0,0,0,0,0,0,0,0,0,0,0"/>
+      <Param name="ul_gain" value="21"/>
+      <Param name="stf_gain" value="0"/>
+    </ParamUnit>
+    <ParamUnit param_id="4">
+      <Param name="dl_gain" value="0,0,0,0,0,0,0,0,0,0,0"/>
+      <Param name="ul_gain" value="21"/>
+      <Param name="stf_gain" value="0"/>
+    </ParamUnit>
+    <ParamUnit param_id="5">
+      <Param name="dl_gain" value="0,0,0,0,0,0,0,0,0,0,0"/>
+      <Param name="ul_gain" value="21"/>
+      <Param name="stf_gain" value="0"/>
+    </ParamUnit>
+    <ParamUnit param_id="6">
+      <Param name="dl_gain" value="0,0,0,0,0,0,0,0,0,0,0"/>
+      <Param name="ul_gain" value="21"/>
+      <Param name="stf_gain" value="0"/>
+    </ParamUnit>
+  </ParamUnitPool>
+</AudioParam>

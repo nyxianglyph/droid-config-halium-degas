@@ -101,6 +101,16 @@ ACTION=="add", KERNEL=="ccci*", OWNER="radio", GROUP="radio", MODE="0660"
 ACTION=="add", KERNEL=="ttyC*", OWNER="radio", GROUP="radio", MODE="0660"
 ACTION=="add", KERNEL=="eemcs*", OWNER="radio", GROUP="radio", MODE="0660"
 ACTION=="add", KERNEL=="emd*", OWNER="radio", GROUP="radio", MODE="0660"
+# Audio DSP (ADSP) nodes. The audio HAL runs inside PulseAudio (group audio);
+# without access to audio_ipi it logs "dsp not ready" and the DSP smart PA
+# path used for speakerphone calls stays silent.
+ACTION=="add", KERNEL=="adsp", OWNER="root", GROUP="audio", MODE="0660"
+ACTION=="add", KERNEL=="adsp_0", OWNER="root", GROUP="audio", MODE="0440"
+ACTION=="add", KERNEL=="adsp_1", OWNER="root", GROUP="audio", MODE="0440"
+ACTION=="add", KERNEL=="adsp_in_scp", OWNER="root", GROUP="audio", MODE="0660"
+ACTION=="add", KERNEL=="audio_ipi", OWNER="root", GROUP="audio", MODE="0660"
+ACTION=="add", KERNEL=="usip", OWNER="root", GROUP="audio", MODE="0660"
+ACTION=="add", KERNEL=="vow", OWNER="root", GROUP="audio", MODE="0640"
 ACTION=="add", KERNEL=="ccci_pcm_rx", OWNER="audio", GROUP="audio", MODE="0660"
 ACTION=="add", KERNEL=="ccci_pcm_tx", OWNER="audio", GROUP="audio", MODE="0660"
 ACTION=="add", KERNEL=="ccci_aud", OWNER="audio", GROUP="audio", MODE="0660"
